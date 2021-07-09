@@ -12,6 +12,7 @@ const Button = styled.button`
   border: 2px solid palevioletred;
   border-radius: 3px;
 `;
+
 function App () {
   const initialData = [{ text: 'Loading Notes ... ' }];
   const [data, setData] = useState(initialData);
