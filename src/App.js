@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import produce from 'immer';
 import styled from 'styled-components';
-const Notes = props => props.data.map(note => <div>{note.text}</div>);
+import image from './dog.gif';
+const Notes = props => props.data.map(note => <Wrapper><div>{note.text}</div></Wrapper>);
 const Button = styled.button`
-  background: ${props => props.primary ? "palevioletred" : "white"};
+  background: ${props => props.primary ? "#561475" : "white"};
   color: ${props => props.primary ? "white" : "palevioletred"};
 
   font-size: 1em;
@@ -11,6 +12,23 @@ const Button = styled.button`
   padding: 0.25em 1em;
   border: 2px solid palevioletred;
   border-radius: 3px;
+`;
+
+const Title = styled.h1`
+  font-size: 2.5em;
+  text-align: center;
+  color: #282c34;
+`;
+
+const Wrapper = styled.section`
+  padding: 2em;
+  margin: 12px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
+  width: 80%;
+  background: #f7f4f0;
 `;
 
 function App () {
@@ -40,9 +58,15 @@ function App () {
   }, 0);
   return (
     <>
-      <input style={{ color: '#c56ceb' }} id="noteinput" style={{ width: '80%' }} type="text" placeholder="Enter a new note" />
-      <Button onClick={() => handleClick()}>Add note</Button>
-      <Notes data={data} />
+      <Title>The-Purple-Dog-Zero-Peanut-Butter-Soccer-Notes-App</Title>
+      <img src={image} alt="dog"/>
+  
+
+      <input style={{ color: '#c56ceb', width: '80%' }} id="noteinput"  type="text" placeholder="Enter a new note" />
+      <button onClick={() => handleClick()}>Add note</button>
+      
+        <Notes data={data} />
+     
     </>
   );
 };
