@@ -1,6 +1,17 @@
 import { useState, useEffect } from 'react';
 import produce from 'immer';
+import styled from 'styled-components';
 const Notes = props => props.data.map(note => <div>{note.text}</div>);
+const Button = styled.button`
+  background: ${props => props.primary ? "palevioletred" : "white"};
+  color: ${props => props.primary ? "white" : "palevioletred"};
+
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid palevioletred;
+  border-radius: 3px;
+`;
 function App () {
   const initialData = [{ text: 'Loading Notes ... ' }];
   const [data, setData] = useState(initialData);
@@ -28,8 +39,8 @@ function App () {
   }, 0);
   return (
     <>
-      <input id="noteinput" style={{ width: '80%' }} type="text" placeholder="Enter a new note" />
-      <button onClick={() => handleClick()}>Add note</button>
+      <input style={{ color: '#c56ceb' }} id="noteinput" style={{ width: '80%' }} type="text" placeholder="Enter a new note" />
+      <Button onClick={() => handleClick()}>Add note</Button>
       <Notes data={data} />
     </>
   );
