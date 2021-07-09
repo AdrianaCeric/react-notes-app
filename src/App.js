@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import { useState, useEffect } from 'react';
+import produce from 'immer';
+const Notes = props => props.data.map(note => <div>{note.text}</div>);
+function App () {
+  const initialData = [{ text: 'Loading Notes ... ' }];
+  const [data, setData] = useState(initialData);
+  const handleClick = () => {
+    const text = document.querySelector('#noteinput').value.trim();
+    if (text) {
+      const nextState = produce(data, draftState => {
+        draftState.push({ text });
+      });
+      document.querySelector('#noteinput').value = '';
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('data', JSON.stringify(nextState));
+      }
+      setData(nextState);
+    }
+  };
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const getData = localStorage.getItem('data');
+      if (getData !== '' && getData !== null) {
+        return setData(JSON.parse(getData));
+      }
+      return setData([]);
+    }
+  }, 0);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <input id="noteinput" style={{ width: '80%' }} type="text" placeholder="Enter a new note" />
+      <button onClick={() => handleClick()}>Add note</button>
+      <Notes data={data} />
+    </>
   );
-}
-
+};
 export default App;
