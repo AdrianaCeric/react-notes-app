@@ -31,6 +31,10 @@ const Wrapper = styled.section`
   background: #f7f4f0;
 `;
 
+const InputWrapper = styled.div`
+  text-align: center;
+`;
+
 function App () {
   const initialData = [{ text: 'Loading Notes ... ' }];
   const [data, setData] = useState(initialData);
@@ -60,13 +64,13 @@ function App () {
     <>
       <Title>The-Purple-Dog-Zero-Peanut-Butter-Soccer-Notes-App</Title>
       <img src={image} alt="dog"/>
-  
 
-      <input style={{ color: '#c56ceb', width: '80%' }} id="noteinput"  type="text" placeholder="Enter a new note" />
-      <button onClick={() => handleClick()}>Add note</button>
-      
-        <Notes data={data} />
-     
+      <InputWrapper>
+        <input style={{ color: '#c56ceb', width: '80%' }} id="noteinput" type="text" placeholder="Enter a new note" />
+        <button onClick={() => handleClick()}>Add note</button>
+      </InputWrapper>
+      <Notes data={data} />
+
     </>
   );
 };
